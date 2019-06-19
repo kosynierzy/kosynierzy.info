@@ -1,0 +1,24 @@
+<h1>Listing Posts</h1>
+
+<table>
+  <thead>
+    <tr>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for post <- @posts do %>
+    <tr>
+
+      <td>
+        <%= link "Show", to: Routes.blog_post_path(@conn, :show, post) %>
+        <%= link "Edit", to: Routes.blog_post_path(@conn, :edit, post) %>
+        <%= link "Delete", to: Routes.blog_post_path(@conn, :delete, post), method: :delete, data: [confirm: "Are you sure?"] %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Post", to: Routes.blog_post_path(@conn, :new) %></span>
