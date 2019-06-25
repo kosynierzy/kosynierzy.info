@@ -16,7 +16,7 @@ defmodule Kosynierzy.Blog.Post do
   @doc false
   def changeset(post, attrs) do
     post
-    |> cast(attrs, [:title, :content])
+    |> cast(attrs, [:title, :content, :published_at])
     |> validate_required([:title, :content])
   end
 end

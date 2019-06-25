@@ -22,6 +22,21 @@ defmodule Kosynierzy.Blog do
   end
 
   @doc """
+  Returns the list of published posts.
+
+  ## Examples
+
+      iex> list_published_posts()
+      [%Post{}, ...]
+
+  """
+  def list_published_posts do
+    query = from p in Post, where: not is_nil(p.published_at)
+
+    Repo.all(query)
+  end
+
+  @doc """
   Gets a single post.
 
   Raises `Ecto.NoResultsError` if the Post does not exist.
