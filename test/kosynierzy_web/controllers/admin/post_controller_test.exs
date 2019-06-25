@@ -1,14 +1,14 @@
 defmodule KosynierzyWeb.Admin.PostControllerTest do
   use KosynierzyWeb.ConnCase
 
-  alias Kosynierzy.Admin
+  alias Kosynierzy.Blog
 
-  @create_attrs %{content: "some content", publshed: true, title: "some title"}
-  @update_attrs %{content: "some updated content", publshed: false, title: "some updated title"}
-  @invalid_attrs %{content: nil, publshed: nil, title: nil}
+  @create_attrs %{content: "some content", title: "some title"}
+  @update_attrs %{content: "some updated content", title: "some updated title"}
+  @invalid_attrs %{content: nil, title: nil}
 
   def fixture(:post) do
-    {:ok, post} = Admin.create_post(@create_attrs)
+    {:ok, post} = Blog.create_post(@create_attrs)
     post
   end
 
@@ -27,14 +27,14 @@ defmodule KosynierzyWeb.Admin.PostControllerTest do
   end
 
   describe "create post" do
-    test "redirects to show when data is valid", %{conn: conn} do
+    test "redirects to edit when data is valid", %{conn: conn} do
       conn = post(conn, Routes.admin_post_path(conn, :create), post: @create_attrs)
 
       assert %{id: id} = redirected_params(conn)
-      assert redirected_to(conn) == Routes.admin_post_path(conn, :show, id)
+      assert redirected_to(conn) == Routes.admin_post_path(conn, :edit, id)
 
-      conn = get(conn, Routes.admin_post_path(conn, :show, id))
-      assert html_response(conn, 200) =~ "Show Post"
+      conn = get(conn, Routes.admin_post_path(conn, :edit, id))
+      assert html_response(conn, 200) =~ "Edit Post"
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
@@ -57,9 +57,9 @@ defmodule KosynierzyWeb.Admin.PostControllerTest do
 
     test "redirects when data is valid", %{conn: conn, post: post} do
       conn = put(conn, Routes.admin_post_path(conn, :update, post), post: @update_attrs)
-      assert redirected_to(conn) == Routes.admin_post_path(conn, :show, post)
+      assert redirected_to(conn) == Routes.admin_post_path(conn, :edit, post)
 
-      conn = get(conn, Routes.admin_post_path(conn, :show, post))
+      conn = get(conn, Routes.admin_post_path(conn, :edit, post))
       assert html_response(conn, 200) =~ "some updated content"
     end
 
@@ -75,8 +75,9 @@ defmodule KosynierzyWeb.Admin.PostControllerTest do
     test "deletes chosen post", %{conn: conn, post: post} do
       conn = delete(conn, Routes.admin_post_path(conn, :delete, post))
       assert redirected_to(conn) == Routes.admin_post_path(conn, :index)
+
       assert_error_sent 404, fn ->
-        get(conn, Routes.admin_post_path(conn, :show, post))
+        get(conn, Routes.admin_post_path(conn, :edit, post))
       end
     end
   end
