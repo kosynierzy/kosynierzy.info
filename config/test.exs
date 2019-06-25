@@ -7,7 +7,7 @@ config :kosynierzy, Kosynierzy.Repo,
   database: "kosynierzy_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox,
-  port: 5433
+  port: System.get_env("DATABASE_PORT") || 5432
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
