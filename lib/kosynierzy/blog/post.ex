@@ -7,6 +7,7 @@ defmodule Kosynierzy.Blog.Post do
   schema "posts" do
     field :content, :string
     field :title, :string
+    field :published, :boolean, virtual: true
     field :published_at, :utc_datetime
 
     timestamps()

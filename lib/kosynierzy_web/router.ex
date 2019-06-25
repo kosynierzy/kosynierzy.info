@@ -13,10 +13,16 @@ defmodule KosynierzyWeb.Router do
     plug :accepts, ["json"]
   end
 
+  scope "/admin", KosynierzyWeb.Admin, as: :admin do
+    pipe_through :browser
+
+    resources "/posts", PostController, except: [:show]
+  end
+
   scope "/", KosynierzyWeb.Blog, as: :blog do
     pipe_through :browser
 
-    resources("/", PostController)
+    resources "/", PostController, only: [:index, :show]
   end
 
   # Other scopes may use custom stacks.

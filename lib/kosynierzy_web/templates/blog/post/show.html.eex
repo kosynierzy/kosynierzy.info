@@ -1,8 +1,5 @@
-<h1>Show Post</h1>
+<span><%= link "Powrót", to: Routes.blog_post_path(@conn, :index) %></span>
 
-<ul>
-
-</ul>
-
-<span><%= link "Edit", to: Routes.blog_post_path(@conn, :edit, @post) %></span>
-<span><%= link "Back", to: Routes.blog_post_path(@conn, :index) %></span>
+<h1><%= @post.title %></h1>
+<div>Opublikowano <%= @post.published_at |> format_date() %></div>
+<div><%= @post.content %></div>

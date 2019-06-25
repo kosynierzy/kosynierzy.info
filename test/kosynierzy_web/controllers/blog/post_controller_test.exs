@@ -13,7 +13,7 @@ defmodule KosynierzyWeb.Blog.PostControllerTest do
   describe "index" do
     test "lists all posts", %{conn: conn} do
       conn = get(conn, Routes.blog_post_path(conn, :index))
-      assert html_response(conn, 200) =~ "Listing Posts"
+      assert html_response(conn, 200) =~ "Wpisy"
     end
   end
 

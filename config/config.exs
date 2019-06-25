@@ -10,6 +10,8 @@ use Mix.Config
 config :kosynierzy,
   ecto_repos: [Kosynierzy.Repo]
 
+config :kosynierzy, :generators, binary_id: true
+
 # Configures the Repo
 config :kosynierzy, Kosynierzy.Repo,
   migration_primary_key: [name: :id, type: :uuid],

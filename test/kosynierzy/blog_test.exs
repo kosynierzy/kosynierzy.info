@@ -6,8 +6,8 @@ defmodule Kosynierzy.BlogTest do
   describe "posts" do
     alias Kosynierzy.Blog.Post
 
-    @valid_attrs %{title: "Blog post", content: "Blog content"}
-    @update_attrs %{title: "Updated post", content: "Updated content"}
+    @valid_attrs %{title: "Blog post", content: "Blog content", published: false}
+    @update_attrs %{title: "Updated post", content: "Updated content", published: true}
     @invalid_attrs %{title: "", content: ""}
 
     def post_fixture(attrs \\ %{}) do
