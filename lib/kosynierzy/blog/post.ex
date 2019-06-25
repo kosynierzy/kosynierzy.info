@@ -16,7 +16,35 @@ defmodule Kosynierzy.Blog.Post do
   @doc false
   def changeset(post, attrs) do
     post
-    |> cast(attrs, [:title, :content, :published_at])
+    |> cast(attrs, [:title, :content, :published, :published_at])
     |> validate_required([:title, :content])
+    |> maybe_update_publication_date()
+  end
+
+  defp maybe_update_publication_date(changeset) do
+    case get_change(changeset, :published) do
+      true -> maybe_publish(changeset)
+      false -> maybe_unpublish(changeset)
+      _ -> changeset
+    end
+  end
+
+  defp maybe_publish(changeset) do
+    case changeset |> get_field(:published_at) do
+      nil -> put_change(changeset, :published_at, published_timestamp())
+      _ -> changeset
+    end
+  end
+
+  defp maybe_unpublish(changeset) do
+    case changeset |> get_field(:published_at) do
+      %DateTime{} -> put_change(changeset, :published_at, nil)
+      _ -> changeset
+    end
+  end
+
+  defp published_timestamp do
+    DateTime.utc_now()
+    |> DateTime.truncate(:second)
   end
 end

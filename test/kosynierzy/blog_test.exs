@@ -6,9 +6,9 @@ defmodule Kosynierzy.BlogTest do
   describe "posts" do
     alias Kosynierzy.Blog.Post
 
-    @valid_attrs %{title: "Blog post", content: "Blog content", published: false}
-    @update_attrs %{title: "Updated post", content: "Updated content", published: true}
-    @invalid_attrs %{title: "", content: ""}
+    @valid_attrs %{title: "Blog post", content: "Blog content"}
+    @update_attrs %{title: "Updated post", content: "Updated content"}
+    @invalid_attrs %{title: "", content: "", published: ""}
 
     def post_fixture(attrs \\ %{}) do
       {:ok, post} =
@@ -33,6 +33,18 @@ defmodule Kosynierzy.BlogTest do
       assert {:ok, %Post{} = post} = Blog.create_post(@valid_attrs)
     end
 
+    test "create_post/1 with published: false keeps publication date empty" do
+      attrs = Map.put(@valid_attrs, :published, false)
+
+      assert {:ok, %Post{published_at: nil} = post} = Blog.create_post(attrs)
+    end
+
+    test "create_post/1 with published: true sets the publication date" do
+      attrs = Map.put(@valid_attrs, :published, true)
+
+      assert {:ok, %Post{published_at: %DateTime{}} = post} = Blog.create_post(attrs)
+    end
+
     test "create_post/1 with invalid data returns error changeset" do
       assert {:error, %Ecto.Changeset{}} = Blog.create_post(@invalid_attrs)
     end
@@ -40,6 +52,17 @@ defmodule Kosynierzy.BlogTest do
     test "update_post/2 with valid data updates the post" do
       post = post_fixture()
       assert {:ok, %Post{} = post} = Blog.update_post(post, @update_attrs)
+    end
+
+    test "update_post/2 with published: false unpublish the post" do
+      post =
+        @valid_attrs
+        |> Map.put(:published, true)
+        |> post_fixture()
+
+      attrs = Map.put(@update_attrs, :published, false)
+
+      assert {:ok, %Post{published_at: nil} = post} = Blog.update_post(post, attrs)
     end
 
     test "update_post/2 with invalid data returns error changeset" do
