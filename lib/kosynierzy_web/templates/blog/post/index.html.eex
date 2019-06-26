@@ -3,7 +3,7 @@
 <%= for post <- @posts do %>
   <section id="post-<%= post.id %>">
     <h1>
-      <%= link post.title, to: Routes.blog_post_path(@conn, :show, post) %>
+      <%= link post.title, to: link_to_post(@conn, post) %>
     </h1>
     <div>Opublikowano <%= post.published_at |> format_date() %></div>
     <div><%= post.content %></div>

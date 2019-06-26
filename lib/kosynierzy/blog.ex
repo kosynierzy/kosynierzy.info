@@ -30,7 +30,36 @@ defmodule Kosynierzy.Blog do
       [%Post{}, ...]
 
   """
-  def list_published_posts do
+  def list_published_posts(%{"year" => year, "month" => month, "day" => day}) do
+    query =
+      from p in Post,
+        where:
+          fragment("date_part('year', ?)", p.published_at) == type(^year, :integer) and
+            fragment("date_part('month', ?)", p.published_at) == type(^month, :integer) and
+            fragment("date_part('day', ?)", p.published_at) == type(^day, :integer)
+
+    Repo.all(query)
+  end
+
+  def list_published_posts(%{"year" => year, "month" => month}) do
+    query =
+      from p in Post,
+        where:
+          fragment("date_part('year', ?)", p.published_at) == type(^year, :integer) and
+            fragment("date_part('month', ?)", p.published_at) == type(^month, :integer)
+
+    Repo.all(query)
+  end
+
+  def list_published_posts(%{"year" => year}) do
+    query =
+      from p in Post,
+        where: fragment("date_part('year', ?)", p.published_at) == type(^year, :integer)
+
+    Repo.all(query)
+  end
+
+  def list_published_posts(_) do
     query = from p in Post, where: not is_nil(p.published_at)
 
     Repo.all(query)

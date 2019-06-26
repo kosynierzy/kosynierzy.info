@@ -22,7 +22,11 @@ defmodule KosynierzyWeb.Router do
   scope "/", KosynierzyWeb.Blog, as: :blog do
     pipe_through :browser
 
-    resources "/", PostController, only: [:index, :show]
+    get "/", PostController, :index
+    get "/:year", PostController, :index
+    get "/:year/:month", PostController, :index
+    get "/:year/:month/:day", PostController, :index
+    get "/:year/:month/:day/:slug", PostController, :show
   end
 
   # Other scopes may use custom stacks.
