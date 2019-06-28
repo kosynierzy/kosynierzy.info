@@ -14,7 +14,7 @@ defmodule KosynierzyWeb.Blog.PostView do
          year <- published_at.year,
          month <- published_at.month |> zeropad(),
          day <- published_at.day |> zeropad() do
-      Routes.blog_post_path(conn, :show, year, month, day, post.title)
+      Routes.blog_post_path(conn, :show, year, month, day, post.slug)
     end
   end
 

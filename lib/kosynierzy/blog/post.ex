@@ -6,6 +6,7 @@ defmodule Kosynierzy.Blog.Post do
 
   schema "posts" do
     field :content, :string
+    field :slug, :string
     field :title, :string
     field :published, :boolean, virtual: true
     field :published_at, :utc_datetime
@@ -19,6 +20,23 @@ defmodule Kosynierzy.Blog.Post do
     |> cast(attrs, [:title, :content, :published, :published_at])
     |> validate_required([:title, :content])
     |> maybe_update_publication_date()
+    |> slugify()
+  end
+
+  defp slugify(changeset) do
+    case get_change(changeset, :title) do
+      nil ->
+        changeset
+
+      title ->
+        slug =
+          :iconv.convert("utf-8", "ascii//translit", title)
+          |> String.downcase()
+          |> String.replace(~r/[\s-]+/, "-")
+          |> String.replace(~r/[^\w-]/, "")
+
+        put_change(changeset, :slug, slug)
+    end
   end
 
   defp maybe_update_publication_date(changeset) do

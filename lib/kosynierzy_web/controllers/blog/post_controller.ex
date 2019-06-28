@@ -8,8 +8,8 @@ defmodule KosynierzyWeb.Blog.PostController do
     render(conn, "index.html", posts: posts)
   end
 
-  def show(conn, %{"id" => id}) do
-    post = Blog.get_post!(id)
+  def show(conn, %{"year" => year, "month" => month, "day" => day, "slug" => slug}) do
+    post = Blog.get_post!(year, month, day, slug)
     render(conn, "show.html", post: post)
   end
 end

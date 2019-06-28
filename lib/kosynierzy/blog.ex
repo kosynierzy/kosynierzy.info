@@ -81,6 +81,17 @@ defmodule Kosynierzy.Blog do
   """
   def get_post!(id), do: Repo.get!(Post, id)
 
+  def get_post!(year, month, day, slug) do
+    query =
+      from p in Post,
+        where:
+          fragment("date_part('year', ?)", p.published_at) == type(^year, :integer) and
+            fragment("date_part('month', ?)", p.published_at) == type(^month, :integer) and
+            fragment("date_part('day', ?)", p.published_at) == type(^day, :integer)
+
+    Repo.get_by!(query, slug: slug)
+  end
+
   @doc """
   Creates a post.
 
