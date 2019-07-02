@@ -4,4 +4,13 @@
 
 @tailwind components;
 
+#top {
+  background-color: #086331;
+  background-image: url('/images/top.jpg');
+  background-repeat: no-repeat;
+  background-position: 50% 0%;
+
+  height: 300px;
+}
+
 @tailwind utilities;
