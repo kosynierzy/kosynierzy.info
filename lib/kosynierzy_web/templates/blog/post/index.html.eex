@@ -6,6 +6,6 @@
       <%= link post.title, to: link_to_post(@conn, post) %>
     </h1>
     <div>Opublikowano <%= post.published_at |> format_date() %></div>
-    <div><%= post.content %></div>
+    <div><%= raw post.content %></div>
   </section>
 <% end %>
