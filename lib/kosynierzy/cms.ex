@@ -1,12 +1,12 @@
-defmodule Kosynierzy.Blog do
+defmodule Kosynierzy.CMS do
   @moduledoc """
-  The Blog context.
+  The CMS context.
   """
 
   import Ecto.Query, warn: false
   alias Kosynierzy.Repo
 
-  alias Kosynierzy.Blog.Post
+  alias Kosynierzy.CMS.Post
 
   @doc """
   Returns the list of posts.

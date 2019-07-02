@@ -1,14 +1,14 @@
 defmodule KosynierzyWeb.Admin.PostControllerTest do
   use KosynierzyWeb.ConnCase
 
-  alias Kosynierzy.Blog
+  alias Kosynierzy.CMS
 
   @create_attrs %{content: "some content", title: "some title"}
   @update_attrs %{content: "some updated content", title: "some updated title"}
   @invalid_attrs %{content: nil, title: nil}
 
   def fixture(:post) do
-    {:ok, post} = Blog.create_post(@create_attrs)
+    {:ok, post} = CMS.create_post(@create_attrs)
     post
   end
 

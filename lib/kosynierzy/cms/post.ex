@@ -1,4 +1,4 @@
-defmodule Kosynierzy.Blog.Post do
+defmodule Kosynierzy.CMS.Post do
   use Ecto.Schema
   import Ecto.Changeset
 
