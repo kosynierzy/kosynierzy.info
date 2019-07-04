@@ -16,17 +16,21 @@ defmodule KosynierzyWeb.Router do
   scope "/admin", KosynierzyWeb.Admin, as: :admin do
     pipe_through :browser
 
-    resources "/posts", PostController, except: [:show]
+    resources "/articles", ArticleController, except: [:show]
   end
 
   scope "/", KosynierzyWeb.Blog, as: :blog do
     pipe_through :browser
 
-    get "/", PostController, :index
-    get "/:year", PostController, :index
-    get "/:year/:month", PostController, :index
-    get "/:year/:month/:day", PostController, :index
-    get "/:year/:month/:day/:slug", PostController, :show
+    resources "/articles", ArticleController, only: [:show] do
+      resources "/comments", CommentController, only: [:create]
+    end
+
+    get "/", ArticleController, :index
+    get "/:year", ArticleController, :index
+    get "/:year/:month", ArticleController, :index
+    get "/:year/:month/:day", ArticleController, :index
+    get "/:year/:month/:day/:slug", ArticleController, :show
   end
 
   # Other scopes may use custom stacks.

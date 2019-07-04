@@ -1,0 +1,11 @@
+<article id="article-<%= @article.id %>" class="article">
+  <header>
+    <h1 class="article-title">
+      <%= link @article.title, to: link_to_article(@conn, @article) %>
+    </h1>
+    <h2 class="article-author">Autor</h2>
+    <time class="article-time" datetime="<%= @article.published_at %>"><%= @article.published_at |> format_date() %></time>
+    <h3 class="article-comments">Komentarzy: <%= @article.comments_count %></h3>
+  </header>
+  <div class="article-content"><%= raw @article.content %></div>
+</article>

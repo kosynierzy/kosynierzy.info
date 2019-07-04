@@ -4,13 +4,87 @@
 
 @tailwind components;
 
-#top {
-  background-color: #086331;
-  background-image: url('/images/top.jpg');
+body {
+  background-image: url('/images/bg.jpg');
   background-repeat: no-repeat;
-  background-position: 50% 0%;
+  background-attachment: fixed;
+  background-position: 50% 0;
+}
 
-  height: 300px;
+#top {
+  background-color: #54a175;
+
+  @apply text-xl py-4 border-b border-gray-400 shadow;
+}
+
+.nav-link {
+  @apply text-white font-bold;
+}
+
+#main {
+  @apply p-4 bg-white shadow rounded border border-gray-100 mr-4;
+}
+
+#sidebar {
+  @apply p-4 bg-white shadow rounded border border-gray-100;
+}
+
+#bottom {
+  background-color: #e51c22;
+
+  @apply py-2 text-gray-200 font-bold text-center text-xs border-t border-gray-400;
+}
+
+.article {
+  @apply mb-4;
+}
+
+.article-title {
+  @apply text-2xl text-gray-900;
+}
+
+.article-title:hover {
+  @apply underline;
+}
+
+.article-author {
+  @apply text-xs inline-block text-gray-600;
+}
+
+.article-time {
+  @apply text-xs text-gray-600;
+}
+
+.article-comments {
+  @apply text-xs inline-block text-gray-600;
+}
+
+.comment-label {
+  @apply block text-gray-700 text-sm font-bold mb-2;
+}
+
+.comment-input {
+  @apply shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight;
+}
+
+.comment-textarea {
+  @apply shadow w-full appearance-none border rounded py-2 px-3 text-gray-700 leading-tight;
+}
+
+.comment-input:focus {
+  @apply outline-none shadow-outline;
+}
+
+.comment-submit {
+  @apply bg-blue-500 text-white font-bold py-2 px-4 rounded;
+}
+
+.comment-submit:hover {
+  @apply bg-blue-700 outline-none shadow-outline;
+}
+
+.help-block {
+  @apply text-red-500 text-xs italic;
 }
 
 @tailwind utilities;

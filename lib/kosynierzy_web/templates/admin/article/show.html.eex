@@ -1,0 +1,23 @@
+<h1>Show Article</h1>
+
+<ul>
+
+  <li>
+    <strong>Content:</strong>
+    <%= @article.content %>
+  </li>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @article.title %>
+  </li>
+
+  <li>
+    <strong>Publshed:</strong>
+    <%= @article.publshed %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.admin_article_path(@conn, :edit, @article) %></span>
+<span><%= link "Back", to: Routes.admin_article_path(@conn, :index) %></span>

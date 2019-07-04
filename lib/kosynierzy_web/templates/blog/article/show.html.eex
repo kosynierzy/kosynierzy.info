@@ -1,0 +1,19 @@
+<span><%= link "Powrót", to: Routes.blog_article_path(@conn, :index) %></span>
+
+<%= render("article.html", conn: @conn, article: @article) %>
+
+<section id="comments" class="max-w-md">
+  <h1 class="text-xl">Komentarze</h1>
+
+  <%= for comment <- @article.comments do %>
+    <article id="comment-<%= comment.id %>" class="mb-4">
+      <header>
+        <h1 class="text-xl"><%= comment.author %></h1>
+        <time class="text-xs" datetime="<%= comment.inserted_at %>"><%= comment.inserted_at |> format_date() %></time>
+      </header>
+      <div><p><%= comment.content %></p></div>
+    </article>
+  <% end %>
+
+  <%= render("comment_form.html", conn: @conn, article: @article, changeset: @changeset) %>
+</section>

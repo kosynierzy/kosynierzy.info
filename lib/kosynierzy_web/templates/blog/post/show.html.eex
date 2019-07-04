@@ -1,3 +1,0 @@
-<span><%= link "Powrót", to: Routes.blog_post_path(@conn, :index) %></span>
-
-<%= render("article.html", conn: @conn, post: @post) %>

@@ -1,3 +1,0 @@
-<%= for post <- @posts do %>
-  <%= render("article.html", conn: @conn, post: post) %>
-<% end %>

@@ -1,0 +1,35 @@
+<%= form_for @changeset, Routes.blog_article_comment_path(@conn, :create, @article), fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Popraw błędy</p>
+    </div>
+  <% end %>
+
+  <div class="mb-4">
+    <%= label f, :author, "Autor", class: "comment-label" %>
+    <%= text_input f, :author, class: "comment-input" %>
+    <%= error_tag f, :author %>
+  </div>
+
+  <div class="mb-4">
+    <%= label f, :author_email, "Email", class: "comment-label" %>
+    <%= text_input f, :author_email, class: "comment-input" %>
+    <%= error_tag f, :author_email %>
+  </div>
+
+  <div class="mb-4">
+    <%= label f, :url, "Link (opcjonalne)", class: "comment-label" %>
+    <%= text_input f, :url, class: "comment-input" %>
+    <%= error_tag f, :url %>
+  </div>
+
+  <div class="mb-4">
+    <%= label f, :content, "Komentarz", class: "comment-label" %>
+    <%= textarea f, :content, class: "comment-textarea", rows: "10" %>
+    <%= error_tag f, :content %>
+  </div>
+
+  <div class="flex items-center justify-end">
+    <%= submit "Dodaj", class: "comment-submit" %>
+  </div>
+<% end %>

@@ -1,3 +1,3 @@
-defmodule KosynierzyWeb.Admin.PostView do
+defmodule KosynierzyWeb.Admin.ArticleView do
   use KosynierzyWeb, :view
 end

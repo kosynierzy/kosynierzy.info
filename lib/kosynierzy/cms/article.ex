@@ -1,22 +1,27 @@
-defmodule Kosynierzy.CMS.Post do
+defmodule Kosynierzy.CMS.Article do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias Kosynierzy.CMS.Comment
+
   @primary_key {:id, :binary_id, autogenerate: true}
 
-  schema "posts" do
+  schema "articles" do
     field :content, :string
     field :slug, :string
     field :title, :string
     field :published, :boolean, virtual: true
     field :published_at, :utc_datetime
+    field :comments_count, :integer, virtual: true
+
+    has_many :comments, Comment
 
     timestamps()
   end
 
   @doc false
-  def changeset(post, attrs) do
-    post
+  def changeset(article, attrs) do
+    article
     |> cast(attrs, [:title, :content, :published, :published_at])
     |> validate_required([:title, :content])
     |> maybe_update_publication_date()
@@ -29,11 +34,7 @@ defmodule Kosynierzy.CMS.Post do
         changeset
 
       title ->
-        slug =
-          :iconv.convert("utf-8", "ascii//translit", title)
-          |> String.downcase()
-          |> String.replace(~r/[\s-]+/, "-")
-          |> String.replace(~r/[^\w-]/, "")
+        slug = Slug.slugify(title)
 
         put_change(changeset, :slug, slug)
     end

@@ -8,16 +8,33 @@
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
   </head>
   <body>
-    <header id="top">
-      <section class="container mx-auto">
-        <a href="https://kosynierzy.info/">kosynierzy.info</a>
-      </section>
+    <header id="top" class="w-full sticky top-0">
+      <div class="container mx-auto">
+        <nav role="navigation">
+          <ul>
+            <li><a href="/" class="nav-link">kosynierzy.info</a></li>
+          </ul>
+      </div>
     </header>
-    <main role="main" class="container mx-auto">
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-      <%= render @view_module, @view_template, assigns %>
-    </main>
+
+    <div class="container mx-auto flex my-2">
+      <main id="main" role="main" class="w-4/5">
+        <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+        <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+        <%= render @view_module, @view_template, assigns %>
+      </main>
+
+      <aside id="sidebar" class="w-1/5">
+        Placeholder
+      </aside>
+    </div>
+
+    <footer id="bottom">
+      <div class="container mx-auto">
+        <p>urodzeni, żeby kibicować</p>
+      </div>
+    </footer>
+
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>
