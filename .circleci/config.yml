@@ -2,14 +2,13 @@
 version: 2
 jobs:
   build:
-    environment:
-      LANG: C.UTF-8
-      LANGUAGE: C.UTF-8
-      LC_ALL: C.UTF-8
     docker:
       - image: circleci/elixir:1.8
         environment:
           MIX_ENV: test
+          LANG: C.UTF-8
+          LANGUAGE: C.UTF-8
+          LC_ALL: C.UTF-8
       - image: circleci/postgres:11-alpine
         environment:
           POSTGRES_USER: postgres
