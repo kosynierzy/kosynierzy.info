@@ -6,8 +6,6 @@ defmodule Slug do
 
       iex> Slug.slugify("Foo Bar Baz")
       "foo-bar-baz"
-      iex> Slug.slugify("Parę słów, na dzień dobry...")
-      "pare-slow-na-dzien-dobry"
       iex> Slug.slugify("Pajace! \\"Pajace?\\" Pajace!")
       "pajace-pajace-pajace"
       iex> Slug.slugify("F0rever --- young  b@@b")
@@ -18,8 +16,8 @@ defmodule Slug do
       "stal-8477-slask-28-wrzesnia-2008"
       iex> Slug.slugify("Galeria (szukamy zdjęć) 2005/06")
       "galeria-szukamy-zdjec-200506"
-      iex> Slug.slugify("Przekaż 1% *** podatku na WKS Śląsk Wrocław")
-      "przekaz-1-podatku-na-wks-slask-wroclaw"
+      iex> Slug.slugify("Przekaż 1% *** podatku na WKS Śląsk")
+      "przekaz-1-podatku-na-wks-slask"
 
   """
   def slugify(string) do
